@@ -29,8 +29,8 @@ end
 
 # O(n) linear
 
-# p my_min_worst(listex)
-# p my_min(listex)
+p my_min_worst(listex)
+p my_min(listex)
 listex = [5,3,-7]
 
 def largest_contiguous_subsum_bad(list)
@@ -50,6 +50,18 @@ end
 
 # O(n^2) or quadratic
 
-
+def largest_contiguous_subsum(list)
+  largest_sum = list.first
+  current_sum = 0
+  list.each do |ele|
+    current_sum += ele
+    if current_sum > largest_sum
+      largest_sum = current_sum
+    elsif current_sum < 0
+      current_sum = 0
+    end
+  end
+  largest_sum
+end 
 
 p largest_contiguous_subsum_bad(listex)
