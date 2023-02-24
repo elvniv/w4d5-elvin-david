@@ -37,18 +37,18 @@ def largest_contiguous_subsum_bad(list)
   sub_arrays = []
   (0...list.length).each do |i|
     (i...list.length).each do |j|
-      sub_arrays << list[i..j]
+      sub_arrays << list[i..j]   #O(n^3)
     end 
   end
   max = 0
-  sub_arrays.each do |sub|
+  sub_arrays.each do |sub| # O(n * m)
     max = sub.sum if sub.sum > max
   end
   max
 end
 
 
-# O(n^2) or quadratic
+# O(n^3) or polynomial
 
 def largest_contiguous_subsum(list)
   largest_sum = list.first
@@ -64,4 +64,21 @@ def largest_contiguous_subsum(list)
   largest_sum
 end 
 
-p largest_contiguous_subsum_bad(listex)
+p largest_contiguous_subsum(listex)
+
+def largest_contiguous_subsum(list)
+    largest_sum = list.first
+    current_sum = 0
+
+    list.each do | ele |
+        current_sum += ele
+        if current_sum > largest_sum 
+            largest_sum = current_sum
+        elsif current_sum < 0
+            current_sum = 0
+        end
+    end
+    largest_sum
+end
+
+# O(n)
